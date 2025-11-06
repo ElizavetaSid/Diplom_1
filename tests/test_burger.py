@@ -110,6 +110,8 @@ class TestBurger:
 
     def test_get_receipt_no_bun_raises_error(self):
         burger = Burger()
-        
-        with pytest.raises(ValueError, match="Cannot generate receipt: bun is not set"):
+        assert burger.bun is None, "Бургер должен быть создан без булки"
+
+        with pytest.raises(ValueError, match="Cannot generate receipt: bun is not set") as exc_info:
             burger.get_receipt()
+        assert exc_info.type is ValueError
